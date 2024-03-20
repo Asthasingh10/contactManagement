@@ -95,7 +95,7 @@ app.post('/api/signup', (req, res) => {
     const { username, password } = req.body;
     console.log("entered");
   
-    // Check if the username already exists
+    
     db.get('SELECT * FROM users WHERE username = ?', [username], (err, existingUser) => {
       if (err) {
         console.error(err.message);
@@ -104,7 +104,6 @@ app.post('/api/signup', (req, res) => {
       }
   
       if (existingUser) {
-        // Username already exists
         res.status(400).json({ error: 'Username already taken' });
         return;
       }
@@ -122,7 +121,8 @@ app.post('/api/signup', (req, res) => {
       });
     });
   });
-// Add a new contact
+
+// Add  new contact
 app.post('/api/contacts', (req, res) => {
     const { firstName, middleName, lastName, email, phone1, phone2, address } = req.body;
   
