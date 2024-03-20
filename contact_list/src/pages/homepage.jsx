@@ -16,9 +16,7 @@ const HomePage = () => {
     phone2: '',
     address: '',
   });
-
-
-  const [editingContact, setEditingContact] = useState(null);
+const [editingContact, setEditingContact] = useState(null);
 
 const handleEditClick = (contact) => {
    setEditingContact({ ...contact });
@@ -28,27 +26,31 @@ const handleEditFormSubmit = async () => {
    try {
       await axios.put(`https://contactlist-1.onrender.com/api/contacts/${editingContact.id}`, editingContact);
       setEditingContact(null);
-      // Fetch all contacts after editing a contact
       fetchAllContacts();
    } catch (error) {
       console.error('Error editing contact:', error.message);
    }
 };
+useEffect(() => {
+  fetchAllContacts();
+}, []);
+
+useEffect(() => {
+  const delayDebounceFn = setTimeout(() => {
+    fetchContacts();
+  }, 300); 
+  return () => clearTimeout(delayDebounceFn);
+}, [searchQuery]);
 
 const handleCancelEdit = () => {
    setEditingContact(null);
 };
 
-  useEffect(() => {
-    // Fetch all contacts on component mount
-    fetchAllContacts();
-  }, []); // Empty dependency array to ensure it runs only once
 
   const fetchAllContacts = async () => {
     try {
       const response = await axios.get('https://contactlist-1.onrender.com/api/contacts');
       setContacts(response.data);
-      console.log("received ->" + response.data);
     } catch (error) {
       console.error('Error fetching contacts:', error.message);
     }
@@ -58,7 +60,6 @@ const handleCancelEdit = () => {
     try {
       const response = await axios.get(`https://contactlist-1.onrender.com/api/search?query=${searchQuery}`);
       setContacts(response.data);
-      console.log("received ->" + response.data);
     } catch (error) {
       console.error('Error fetching contacts:', error.message);
     }
@@ -66,8 +67,6 @@ const handleCancelEdit = () => {
 
   const handleSearchChange = (e) => {
     setSearchQuery(e.target.value);
-    // Fetch contacts based on the search query
-    fetchContacts();
   };
 
   const handleAddClick = () => {
@@ -76,7 +75,6 @@ const handleCancelEdit = () => {
 
   const handleAddFormSubmit = async (e) => {
     e.preventDefault();
-
     try {
       await axios.post('https://contactlist-1.onrender.com/api/contacts', newContact);
       setShowAddForm(false);
@@ -89,7 +87,7 @@ const handleCancelEdit = () => {
         phone2: '',
         address: '',
       });
-      // Fetch all contacts after adding a new contact
+    
       fetchAllContacts();
     } catch (error) {
       console.error('Error adding contact:', error.message);
@@ -99,7 +97,7 @@ const handleCancelEdit = () => {
   const handleDeleteContact = async (id) => {
     try {
       await axios.delete(`https://contactlist-1.onrender.com/api/contacts/${id}`);
-      // Fetch all contacts after deleting a contact
+     
       fetchAllContacts();
     } catch (error) {
       console.error('Error deleting contact:', error.message);

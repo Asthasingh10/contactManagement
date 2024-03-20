@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { Link, Navigate } from 'react-router-dom';
 import axios from 'axios';
 
-import './Login.css'; // Make sure to replace 'Login.css' with your actual CSS file name
+import './Login.css'; 
 
 const Login = ({ authenticateUser }) => {
   const [username, setUsername] = useState('');
@@ -19,9 +19,7 @@ const Login = ({ authenticateUser }) => {
       });
      
       if (response.data.success) {
-        // Call the authentication function on successful login
         authenticateUser();
-        // Set the redirect URL
         setRedirect(response.data.redirect);
       }
       
