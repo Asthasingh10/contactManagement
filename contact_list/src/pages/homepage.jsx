@@ -140,6 +140,7 @@ const handleCancelEdit = () => {
       Middle Name:
       <input
         type="text"
+        required
         value={newContact.middleName}
         onChange={(e) => setNewContact({ ...newContact, middleName: e.target.value })}
       />
@@ -158,6 +159,7 @@ const handleCancelEdit = () => {
     <label>
       Email:
       <input
+       required
         type="email"
         value={newContact.email}
         onChange={(e) => setNewContact({ ...newContact, email: e.target.value })}
@@ -177,6 +179,7 @@ const handleCancelEdit = () => {
     <label>
       Phone Number 2:
       <input
+       required
         type="text"
         value={newContact.phone2}
         onChange={(e) => setNewContact({ ...newContact, phone2: e.target.value })}
@@ -186,6 +189,7 @@ const handleCancelEdit = () => {
     <label>
       Address:
       <textarea
+       required
         value={newContact.address}
         onChange={(e) => setNewContact({ ...newContact, address: e.target.value })}
       />
@@ -196,8 +200,6 @@ const handleCancelEdit = () => {
     </button>
   </form>
 )}
-
-
       <div>
         <h2>All Contacts</h2>
         <ul className="contact-list">
@@ -215,8 +217,7 @@ const handleCancelEdit = () => {
       </button>
       <button
         className="delete-button"
-        onClick={() => handleDeleteContact(contact.id)}
-      >
+        onClick={() => handleDeleteContact(contact.id)}>
         Delete
       </button>
       {editingContact && editingContact.id === contact.id && (
@@ -234,6 +235,7 @@ const handleCancelEdit = () => {
           <label>
             Middle Name:
             <input
+             required
               type="text"
               value={editingContact.middleName}
               onChange={(e) => setEditingContact({ ...editingContact, middleName: e.target.value })}
@@ -252,6 +254,7 @@ const handleCancelEdit = () => {
           <label>
             Email:
             <input
+            required
               type="email"
               value={editingContact.email}
               onChange={(e) => setEditingContact({ ...editingContact, email: e.target.value })}
@@ -271,6 +274,7 @@ const handleCancelEdit = () => {
           <label>
             Phone Number 2:
             <input
+             required
               type="text"
               value={editingContact.phone2}
               onChange={(e) => setEditingContact({ ...editingContact, phone2: e.target.value })}
@@ -280,6 +284,7 @@ const handleCancelEdit = () => {
           <label>
             Address:
             <textarea
+             required
               value={editingContact.address}
               onChange={(e) => setEditingContact({ ...editingContact, address: e.target.value })}
             />
