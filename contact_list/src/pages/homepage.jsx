@@ -24,19 +24,19 @@ const handleEditClick = (contact) => {
 
 const handleEditFormSubmit = async () => {
    try {
-      await axios.put(`https://contactlist-1.onrender.com/api/contacts/${editingContact.id}`, editingContact);
-      setEditingContact(null);
+      await axios.put(`https://contactlist-1.onrender.com/api/contacts/${editingContact.id}`, editingContact)
+      setEditingContact(null); 
       fetchAllContacts();
    } catch (error) {
       console.error('Error editing contact:', error.message);
    }
 };
-useEffect(() => {
+useEffect(() => { 
   fetchAllContacts();
 }, []);
 
-useEffect(() => {
-  const delayDebounceFn = setTimeout(() => {
+useEffect(() => {  
+  const delayDebounceFn = setTimeout(() => {// why we use this function
     fetchContacts();
   }, 300); 
   return () => clearTimeout(delayDebounceFn);
@@ -97,7 +97,6 @@ const handleCancelEdit = () => {
   const handleDeleteContact = async (id) => {
     try {
       await axios.delete(`https://contactlist-1.onrender.com/api/contacts/${id}`);
-     
       fetchAllContacts();
     } catch (error) {
       console.error('Error deleting contact:', error.message);
@@ -117,7 +116,6 @@ const handleCancelEdit = () => {
           onChange={handleSearchChange}
         />
       </div>
-
       <div>
         <button className="add-button" onClick={handleAddClick}>
           Add Contact
@@ -125,7 +123,7 @@ const handleCancelEdit = () => {
       </div>
 
       {showAddForm && (
-  <form className="add-form" onSubmit={handleAddFormSubmit}>
+    <form className="add-form" onSubmit={handleAddFormSubmit}>
     <label>
       First Name:
       <input
@@ -170,6 +168,8 @@ const handleCancelEdit = () => {
       Phone Number 1:
       <input
         type="text"
+        max={10}
+        min={10}
         value={newContact.phone1}
         onChange={(e) => setNewContact({ ...newContact, phone1: e.target.value })}
         required
@@ -181,6 +181,8 @@ const handleCancelEdit = () => {
       <input
        required
         type="text"
+        min={10}
+        max={10}
         value={newContact.phone2}
         onChange={(e) => setNewContact({ ...newContact, phone2: e.target.value })}
       />
@@ -206,7 +208,7 @@ const handleCancelEdit = () => {
   {contacts.map((contact) => (
     <li key={contact.id} className="contact-list-item">
       <span>
-        {contact.firstName} {contact.lastName} - Call: {contact.phone1}, {contact.phone2}<br />
+        {contact.firstName} {contact.lastName} - Phone Num: {contact.phone1}, {contact.phone2}<br />
         Add: {contact.address} <br /> Email: {contact.email}
       </span>
       <button
