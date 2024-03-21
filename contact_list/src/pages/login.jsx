@@ -1,28 +1,24 @@
-// src/pages/Login.js
 import React, { useState } from 'react';
 import { Link, Navigate } from 'react-router-dom';
 import axios from 'axios';
-
 import './Login.css'; 
 
 const Login = ({ authenticateUser }) => {
-  const [username, setUsername] = useState('');
+  const [username, setUsername] = useState(''); 
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [redirect, setRedirect] = useState(null);
 
   const handleLogin = async () => {
     try {
-      const response = await axios.post('https://contactlist-1.onrender.com/api/login', {
+        const response = await axios.post('https://contactlist-1.onrender.com/api/login', {
         username,
         password,
       });
-     
       if (response.data.success) {
         authenticateUser();
         setRedirect(response.data.redirect);
       }
-      
     } catch (error) {
       setError('Invalid credentials. Please try again.');
       console.error('Login error:', error.message);

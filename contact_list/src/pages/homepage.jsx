@@ -36,7 +36,7 @@ useEffect(() => {
 }, []);
 
 useEffect(() => {  
-  const delayDebounceFn = setTimeout(() => {// why we use this function
+  const delayDebounceFn = setTimeout(() => {
     fetchContacts();
   }, 300); 
   return () => clearTimeout(delayDebounceFn);
@@ -46,8 +46,7 @@ const handleCancelEdit = () => {
    setEditingContact(null);
 };
 
-
-  const fetchAllContacts = async () => {
+const fetchAllContacts = async () => {
     try {
       const response = await axios.get('https://contactlist-1.onrender.com/api/contacts');
       setContacts(response.data);

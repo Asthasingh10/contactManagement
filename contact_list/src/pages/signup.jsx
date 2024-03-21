@@ -6,7 +6,6 @@ const Signup = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   
-
   const handleUsernameChange = useCallback((e) => {
     setUsername(e.target.value);
   }, []);

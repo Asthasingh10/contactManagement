@@ -59,7 +59,6 @@ app.get('/api/contacts', (req, res) => {
         res.status(500).json({ error: 'Internal Server Error' });
         return;
       }
-  
         console.log(rows);
       res.json(rows);
     });
@@ -227,8 +226,6 @@ app.get('/api/search', (req, res) => {
 
   app.post('/api/login', (req, res) => {
     const { username, password } = req.body;
-  
-    // Check if the username and password match a user in the database
     const query = 'SELECT * FROM users WHERE username = ? AND password = ?';
     db.get(query, [username, password], (err, user) => {
       if (err) {
@@ -236,12 +233,9 @@ app.get('/api/search', (req, res) => {
         res.status(500).json({ error: 'Internal Server Error' });
         return;
       }
-  
-      if (user) {
-        // User found, send a success response
+      if(user) {
         res.json({ success: true, message: 'Login successful', redirect: '/' });
       } else {
-        // User not found or incorrect password, send an error response
         res.status(401).json({ success: false, message: 'Invalid credentials' });
       }
     });

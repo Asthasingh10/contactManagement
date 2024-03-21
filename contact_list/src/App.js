@@ -1,4 +1,3 @@
-// src/App.js
 import React, { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import HomePage from './pages/homepage';
@@ -7,11 +6,8 @@ import Signup from './pages/signup';
 
 function App() {
   const [isAuthenticated, setAuthenticated] = useState(false);
-
   const authenticateUser = () => {
-    // You may implement a more secure authentication mechanism here
-    // For simplicity, just set isAuthenticated to true for demonstration
-    setAuthenticated(true);
+          setAuthenticated(true);
   };
 
   return (
